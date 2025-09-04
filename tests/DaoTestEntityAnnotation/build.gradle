@@ -15,6 +15,7 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.android.application'
 
 android {
+    namespace "org.greenrobot.greendao.test.entityannotation"
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     // To use deprecated test classes on SDK 28+. https://developer.android.com/training/testing/set-up-project
@@ -47,4 +48,4 @@ dependencies {
     implementation project(':DaoCore')
 }
 
-uploadArchives.enabled = false
+//uploadArchives.enabled = false

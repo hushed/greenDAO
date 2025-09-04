@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':greendao-api')
+    implementation project(':greendao-api')
     compileOnly 'com.google.android:android:4.1.1.4'
     compileOnly 'com.google.android:android-test:4.1.1.4'
     compileOnly 'com.google.android:annotations:4.1.1.4'
@@ -31,7 +31,7 @@ javadoc {
 
     excludes = ['org/greenrobot/dao/internal', 'org/greenrobot/dao/Internal*']
     def srcApi = project(':greendao-api').file('src/main/java/')
-    if (!srcApi.directory) throw new GradleScriptException("Not a directory: ${srcApi}", null)
+    if (!srcApi.directory) throw GradleScriptException("Not a directory: ${srcApi}", null)
     source += srcApi
     doLast {
         copy {
@@ -42,13 +42,13 @@ javadoc {
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from 'build/docs/javadoc'
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 artifacts {
@@ -57,20 +57,43 @@ artifacts {
     archives sourcesJar
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            // Basic definitions are defined in root project
-            pom.project {
-                name 'greenDAO'
-                description 'greenDAO is a light and fast ORM for Android'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            pom {
+                name = 'greenDAO'
+                description = 'greenDAO is a light and fast ORM for Android'
 
                 licenses {
                     license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
                     }
+                }
+
+                // Include other metadata as needed
+                url = 'https://github.com/greenrobot/greenDAO'
+                scm {
+                    url = 'https://github.com/greenrobot/greenDAO'
+                    connection = 'scm:git@github.com:greenrobot/greenDAO.git'
+                    developerConnection = 'scm:git@github.com:greenrobot/greenDAO.git'
+                }
+                developers {
+                    developer {
+                        id = 'greenrobot'
+                        name = 'greenrobot'
+                    }
+                }
+                issueManagement {
+                    system = 'GitHub Issues'
+                    url = 'https://github.com/greenrobot/greenDAO/issues'
+                }
+                organization {
+                    name = 'greenrobot'
+                    url = 'https://greenrobot.org'
                 }
             }
         }
