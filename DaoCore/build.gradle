@@ -19,7 +19,9 @@ dependencies {
 
     compileOnly 'io.reactivex:rxjava:1.1.8'
 
-    compileOnly files('libs/sqlcipher.jar')
+    compileOnly 'net.zetetic:sqlcipher-android:4.10.0@aar'
+    //noinspection GradleDependency
+    compileOnly 'androidx.sqlite:sqlite:2.2.0' // This is taken from the sqlcipher recommendation
 }
 
 apply from: rootProject.file("gradle/publish.gradle")
