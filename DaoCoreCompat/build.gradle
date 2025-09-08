@@ -37,5 +37,6 @@ dependencies {
     compileOnly 'com.google.android:annotations:4.1.1.4'
     compileOnly 'com.google.android:support-v4:r7'
     compileOnly 'io.reactivex:rxjava:1.1.8'
-    compileOnly files('libs/sqlcipher.jar')
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.3'
+    implementation 'androidx.sqlite:sqlite:2.1.0'
 }

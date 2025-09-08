@@ -47,7 +47,8 @@ dependencies {
     // implementation 'org.greenrobot:greendao:3.3.0'
 
     // optional: add if you want to use encrypted databases, see the App class for details
-    implementation 'net.zetetic:sqlcipher-android:4.9.0'
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.3'
+    implementation 'androidx.sqlite:sqlite:2.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
