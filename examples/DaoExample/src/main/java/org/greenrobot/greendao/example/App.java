@@ -14,13 +14,13 @@ public class App extends Application {
         super.onCreate();
 
         // regular SQLite database
-        // ExampleOpenHelper helper = new ExampleOpenHelper(this, "notes-db");
-        // Database db = helper.getWritableDb();
+        ExampleOpenHelper helper = new ExampleOpenHelper(this, "notes-db");
+        Database db = helper.getWritableDb();
 
         // encrypted SQLCipher database
         // note: you need to add SQLCipher to your dependencies, check the build.gradle file
-        ExampleOpenHelper helper = new ExampleOpenHelper(this, "notes-db-encrypted");
-        Database db = helper.getEncryptedWritableDb("encryption-key");
+        // ExampleOpenHelper helper = new ExampleOpenHelper(this, "notes-db-encrypted");
+        // Database db = helper.getEncryptedWritableDb("encryption-key");
 
         daoSession = new DaoMaster(db).newSession();
     }
