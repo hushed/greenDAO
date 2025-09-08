@@ -43,7 +43,6 @@ greendao {
 }
 
 dependencies {
-    implementation project(':greendao-api')
     implementation project(':DaoCoreCompat')
     // implementation 'org.greenrobot:greendao:3.3.0'
 
