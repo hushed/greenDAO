@@ -18,7 +18,7 @@ package org.greenrobot.greendao.database;
 
 import android.database.Cursor;
 import android.database.SQLException;
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 public class EncryptedDatabase implements Database {
     private final SQLiteDatabase delegate;

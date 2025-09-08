@@ -37,6 +37,6 @@ dependencies {
     compileOnly 'com.google.android:annotations:4.1.1.4'
     compileOnly 'com.google.android:support-v4:r7'
     compileOnly 'io.reactivex:rxjava:1.1.8'
-    implementation 'net.zetetic:android-database-sqlcipher:4.5.3'
-    implementation 'androidx.sqlite:sqlite:2.1.0'
+    implementation 'net.zetetic:sqlcipher-android:4.6.1@aar'
+    implementation 'androidx.sqlite:sqlite:2.2.0'
 }

@@ -2,19 +2,17 @@ package org.greenrobot.greendao.database;
 
 import android.content.Context;
 
-import net.sqlcipher.database.SQLiteDatabase;
-import net.sqlcipher.database.SQLiteOpenHelper;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteOpenHelper;
 
 class SqlCipherEncryptedHelper extends SQLiteOpenHelper implements DatabaseOpenHelper.EncryptedHelper {
 
     private final DatabaseOpenHelper delegate;
 
-    public SqlCipherEncryptedHelper(DatabaseOpenHelper delegate, Context context, String name, int version, boolean loadLibs) {
-        super(context, name, null, version);
+    public SqlCipherEncryptedHelper(DatabaseOpenHelper delegate, Context context, String name, int version, String password) {
+        super(context, name, password, null, version, 0, null, null, false);
         this.delegate = delegate;
-        if (loadLibs) {
-            SQLiteDatabase.loadLibs(context);
-        }
+        System.loadLibrary("sqlcipher");
     }
 
     private Database wrap(SQLiteDatabase sqLiteDatabase) {
@@ -38,22 +36,11 @@ class SqlCipherEncryptedHelper extends SQLiteOpenHelper implements DatabaseOpenH
 
     @Override
     public Database getEncryptedReadableDb(String password) {
-        return wrap(getReadableDatabase(password));
-    }
-
-    @Override
-    public Database getEncryptedReadableDb(char[] password) {
-        return wrap(getReadableDatabase(password));
+        return wrap(getReadableDatabase());
     }
 
     @Override
     public Database getEncryptedWritableDb(String password) {
-        return wrap(getWritableDatabase(password));
+        return wrap(getWritableDatabase());
     }
-
-    @Override
-    public Database getEncryptedWritableDb(char[] password) {
-        return wrap(getWritableDatabase(password));
-    }
-
 }

@@ -132,15 +132,13 @@ public abstract class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     interface EncryptedHelper {
         Database getEncryptedReadableDb(String password);
-        Database getEncryptedReadableDb(char[] password);
         Database getEncryptedWritableDb(String password);
-        Database getEncryptedWritableDb(char[] password);
     }
 
-    private EncryptedHelper checkEncryptedHelper() {
+    private EncryptedHelper checkEncryptedHelper(String password) {
         if (encryptedHelper == null) {
             try {
-                Class.forName("net.sqlcipher.database.SQLiteOpenHelper");
+                Class.forName("net.zetetic.database.sqlcipher.SQLiteOpenHelper");
             } catch (ClassNotFoundException e) {
                 throw new DaoException("Using an encrypted database requires SQLCipher, " +
                         "make sure to add it to dependencies: " +
@@ -154,9 +152,9 @@ public abstract class DatabaseOpenHelper extends SQLiteOpenHelper {
                 Class<?> helperClass = Class.forName(
                         "org.greenrobot.greendao.database.SqlCipherEncryptedHelper");
                 Constructor<?> constructor = helperClass.getConstructor(
-                        DatabaseOpenHelper.class, Context.class, String.class, int.class, boolean.class);
+                        DatabaseOpenHelper.class, Context.class, String.class, int.class, String.class);
                 encryptedHelper = (EncryptedHelper) constructor.newInstance(
-                        this, context, name, version, loadSQLCipherNativeLibs);
+                        this, context, name, version, password);
             } catch (Exception e) {
                 throw new DaoException(e);
             }
@@ -171,18 +169,7 @@ public abstract class DatabaseOpenHelper extends SQLiteOpenHelper {
      * @see #onUpgrade(Database, int, int)
      */
     public Database getEncryptedWritableDb(String password) {
-        EncryptedHelper encryptedHelper = checkEncryptedHelper();
-        return encryptedHelper.getEncryptedWritableDb(password);
-    }
-
-    /**
-     * Use this to initialize an encrypted SQLCipher database.
-     *
-     * @see #onCreate(Database)
-     * @see #onUpgrade(Database, int, int)
-     */
-    public Database getEncryptedWritableDb(char[] password) {
-        EncryptedHelper encryptedHelper = checkEncryptedHelper();
+        EncryptedHelper encryptedHelper = checkEncryptedHelper(password);
         return encryptedHelper.getEncryptedWritableDb(password);
     }
 
@@ -193,19 +180,7 @@ public abstract class DatabaseOpenHelper extends SQLiteOpenHelper {
      * @see #onUpgrade(Database, int, int)
      */
     public Database getEncryptedReadableDb(String password) {
-        EncryptedHelper encryptedHelper = checkEncryptedHelper();
+        EncryptedHelper encryptedHelper = checkEncryptedHelper(password);
         return encryptedHelper.getEncryptedReadableDb(password);
     }
-
-    /**
-     * Use this to initialize an encrypted SQLCipher database.
-     *
-     * @see #onCreate(Database)
-     * @see #onUpgrade(Database, int, int)
-     */
-    public Database getEncryptedReadableDb(char[] password) {
-        EncryptedHelper encryptedHelper = checkEncryptedHelper();
-        return encryptedHelper.getEncryptedReadableDb(password);
-    }
-
 }

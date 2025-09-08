@@ -16,8 +16,7 @@
 
 package org.greenrobot.greendao.database;
 
-
-import net.sqlcipher.database.SQLiteStatement;
+import net.zetetic.database.sqlcipher.SQLiteStatement;
 
 public class EncryptedDatabaseStatement implements DatabaseStatement {
     private final SQLiteStatement delegate;
