@@ -5,6 +5,11 @@ archivesBaseName = 'greendao'
 version = rootProject.version
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -19,9 +24,7 @@ dependencies {
 
     compileOnly 'io.reactivex:rxjava:1.1.8'
 
-    compileOnly 'net.zetetic:sqlcipher-android:4.10.0@aar'
-    //noinspection GradleDependency
-    compileOnly 'androidx.sqlite:sqlite:2.2.0' // This is taken from the sqlcipher recommendation
+    compileOnly files('libs/sqlcipher.jar')
 }
 
 apply from: rootProject.file("gradle/publish.gradle")

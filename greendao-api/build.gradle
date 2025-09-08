@@ -5,6 +5,11 @@ version = rootProject.version
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
 
 apply from: rootProject.file("gradle/publish.gradle")
 
