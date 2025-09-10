@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:8.13.0'
         classpath("org.greenrobot:greendao-gradle-plugin:3.3.1")
     }
 }
@@ -15,7 +15,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 29
+    namespace "org.greenrobot.greendao.example"
+    compileSdkVersion 35
 
     // To use deprecated test classes on SDK 28+. https://developer.android.com/training/testing/set-up-project
     useLibrary 'android.test.runner'
@@ -28,8 +29,8 @@ android {
 
     defaultConfig {
         applicationId "org.greenrobot.greendao.example"
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 35
         versionCode 1
         versionName "3"
 
@@ -42,13 +43,15 @@ greendao {
 }
 
 dependencies {
-    implementation 'org.greenrobot:greendao:3.3.0'
+    implementation project(':DaoCoreCompat')
+    // implementation 'org.greenrobot:greendao:3.3.0'
 
     // optional: add if you want to use encrypted databases, see the App class for details
-    // implementation 'net.zetetic:android-database-sqlcipher:3.5.6'
+    implementation 'net.zetetic:sqlcipher-android:4.6.1@aar'
+    implementation 'androidx.sqlite:sqlite:2.2.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
 
-uploadArchives.enabled = false
+//uploadArchives.enabled = false

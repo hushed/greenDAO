@@ -24,6 +24,7 @@ dependencies {
 }
 
 android {
+    namespace "org.greenrobot.greendao.perftest"
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     // To use deprecated test classes on SDK 28+. https://developer.android.com/training/testing/set-up-project
@@ -37,4 +38,4 @@ android {
     }
 }
 
-uploadArchives.enabled = false
+//uploadArchives.enabled = false

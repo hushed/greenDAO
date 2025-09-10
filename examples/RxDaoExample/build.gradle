@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:8.11.1'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.3.1'
     }
 }
@@ -15,7 +15,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 29
+    namespace "org.greenrobot.greendao.rxexample"
+    compileSdkVersion 35
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -25,7 +26,7 @@ android {
     defaultConfig {
         applicationId "org.greenrobot.greendao.rxexample"
         minSdkVersion 15
-        targetSdkVersion 29
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
     }
@@ -49,4 +50,4 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
 
-uploadArchives.enabled = false
+//uploadArchives.enabled = false

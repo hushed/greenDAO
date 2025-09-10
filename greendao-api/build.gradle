@@ -5,6 +5,11 @@ version = rootProject.version
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
 
 apply from: rootProject.file("gradle/publish.gradle")
 
@@ -21,13 +26,13 @@ javadoc {
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from 'build/docs/javadoc'
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 artifacts {
@@ -35,23 +40,23 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            // Basic definitions are defined in root project
-            pom.project {
-                name 'greenDAO API'
-                description 'greenDAO is a light and fast ORM for Android'
-
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
-            }
-        }
-    }
-}
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            // Basic definitions are defined in root project
+//            pom.project {
+//                name 'greenDAO API'
+//                description 'greenDAO is a light and fast ORM for Android'
+//
+//                licenses {
+//                    license {
+//                        name 'The Apache Software License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                        distribution 'repo'
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}

@@ -1,3 +1,16 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+    id 'com.android.application' version '8.13.0' apply false
+    id 'com.android.library' version '8.13.0' apply false
+    id 'org.jetbrains.kotlin.android' version '2.1.20' apply false
+}
 include 'greendao-api'
 include 'DaoCore'
 include 'DaoGenerator'
@@ -11,3 +24,4 @@ include 'tests:DaoTest'
 include 'tests:DaoTestPerformance'
 include 'tests:DaoTestGenerator'
 include 'tests:DaoTestEntityAnnotation'
+include ':DaoCoreCompat'
